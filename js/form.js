@@ -43,10 +43,29 @@ Endouble.Form = (function () {
 
     };
 
+    var tags = function () {
+
+        var tagsContainers = document.querySelectorAll('div.tags');
+
+        for(var i = 0, l = tagsContainers.length; i<l; i++) {
+
+            setTimeout((function (tagContainer, i) {
+                return function () {
+
+                    var tagEl = new Endouble.Tags(tagContainer).render();
+                    Endouble.fieldsList[tagEl.el.id || 't' + i] = tagEl;
+                };
+            }(tagsContainers[i], i)), 10);
+
+        }
+
+    };
+
     var renderComponents = function () {
 
         dropDowns();
         buttons();
+        tags();
 
     };
 

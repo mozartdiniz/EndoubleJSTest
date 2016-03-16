@@ -5,14 +5,18 @@ Endouble.Select = function () {
 
     function Dropdown(formEl) {
 
-        this.el = null;
+        Endouble.Base.apply(this, arguments);
+
         this.type = 'dropdown';
 
-        this.createBaseHTML = function () {
+        this.createElement = function () {
 
-            this.el = document.createElement('div');
-            this.el.className = 'dropdown';
-            this.el.id = formEl.id;
+            var fragment = document.createDocumentFragment();
+
+            fragment.appendChild(this.createButton());
+            fragment.appendChild(this.createList());
+
+            return fragment;
 
         };
 
@@ -42,11 +46,6 @@ Endouble.Select = function () {
             li.innerHTML = option.innerHTML;
 
             return li;
-
-        };
-
-        this.buttonText = function () {
-
 
         };
 
@@ -95,26 +94,6 @@ Endouble.Select = function () {
         this.openMenu = function () {
             this.ul.setAttribute('aria-expanded', true);
         };
-
-        this.appendEl = function () {
-
-            var parent = formEl.parentNode;
-
-            parent.insertBefore(this.el, formEl);
-            parent.removeChild(formEl);
-
-        };
-
-        this.render = function () {
-
-            this.createBaseHTML();
-            this.el.appendChild(this.createButton());
-            this.el.appendChild(this.createList());
-            this.appendEl();
-
-            return this;
-
-        }
 
     }
 

@@ -5,55 +5,28 @@ Endouble.Button = function () {
 
     function Button(formEl) {
 
-        var value = '',
-            _action = function () {
+        Endouble.Base.apply(this, arguments);
+
+        this.type = 'button';
+
+        this.createElement = function () {
+
+            var button = document.createElement('button');
+
+            button.className = 'btn';
+            button.type = 'button';
+            button.innerHTML = formEl.innerHTML;
+
+            this.setValue(formEl.innerHTML);
+
+            button.addEventListener('click', function (e) {
+                this.bind(formEl);
+                this.triggerAction(e);
+            }.bind(this));
+
+            return button;
         };
 
-        this.el = null;
-
-        this.readFormElInfo = function () {
-            if (formEl) {
-                this.setValue(formEl.innerHTML);
-            }
-        };
-
-        this.createBaseHTML = function () {
-
-            this.el = document.createElement('button');
-            this.el.className = 'btn';
-            this.el.type = 'button';
-            this.el.id = formEl.id;
-
-            this.el.addEventListener('click', this.triggerAction.bind(this));
-        };
-
-        this.setValue = function (buttonInnerHTML) {
-            value = buttonInnerHTML;
-        };
-
-        this.triggerAction = function (e) {
-            _action(e);
-        };
-
-        this.setAction = function (action) {
-            _action = action;
-        };
-
-        this.appendEl = function () {
-
-            var parent = formEl.parentNode;
-
-            parent.insertBefore(this.el, formEl);
-            parent.removeChild(formEl);
-
-        };
-
-        this.render = function () {
-            this.createBaseHTML();
-            this.readFormElInfo();
-
-            return this;
-        };
 
     }
 

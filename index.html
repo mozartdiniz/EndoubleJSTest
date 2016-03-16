@@ -57,10 +57,14 @@
         <option>50km</option>
     </select>
 
-    <button type="submit" class="btn" id="send">SEARCH</button>
+    <button type="submit" class="btn" id="send" data-bind-element="fieldResult">SEARCH</button>
+
+    <div class="tags" id="fieldResult"></div>
 
 </form>
 
+<script src="js/fields/tags.js"></script>
+<script src="js/fields/base.js"></script>
 <script src="js/fields/select.js"></script>
 <script src="js/fields/button.js"></script>
 <script src="js/form.js"></script>
