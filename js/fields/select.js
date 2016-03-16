@@ -8,6 +8,7 @@ Endouble.Select = function () {
         Endouble.Base.apply(this, arguments);
 
         this.type = 'dropdown';
+        this.value = [];
 
         this.createElement = function () {
 
@@ -44,9 +45,28 @@ Endouble.Select = function () {
 
             li.setAttribute('data-value', option.value);
             li.innerHTML = option.innerHTML;
+            li.addEventListener('click', this.listItemAction.bind(this));
 
             return li;
 
+        };
+
+        this.listItemAction = function (e) {
+
+            this.setValue (e.target.getAttribute('data-value'));
+            this.bind(formEl);
+            e.target.className = 'checked';
+
+        };
+
+        this.setValue = function(value) {
+            if (this.allowAddNewItem(value)) {
+                this.value.push(value);
+            }
+        };
+
+        this.getValue = function () {
+            return this.value;
         };
 
         this.createButton = function () {

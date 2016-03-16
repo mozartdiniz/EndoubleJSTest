@@ -64,6 +64,18 @@ Endouble.Base = function () {
 
         };
 
+        this.allowAddNewItem = function (value) {
+
+            for (var i = 0, len = this.value.length; i < len; i++) {
+                if (this.value[i] === value) {
+                    return false;
+                }
+            }
+
+            return true;
+
+        };
+
         this.render = function () {
 
             this.createBaseHTML();

@@ -9,6 +9,7 @@ Endouble.Button = function () {
 
         this.type = 'button';
 
+
         this.createElement = function () {
 
             var button = document.createElement('button');
