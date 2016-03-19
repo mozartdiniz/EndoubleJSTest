@@ -17,15 +17,24 @@
 
     <input name="keyword" type="text" placeholder="E.g. project manager">
 
-    <select multiple class="dropdown" id="roles" data-bind-element="fieldResult">
-        <option>Projectmanagement</option>
+    <select multiple
+            class="dropdown"
+            id="roles"
+            data-bind-element="fieldResult"
+            data-placeholder="Roles">
+
+        <option>Project management</option>
         <option>Sales</option>
         <option selected="selected">Directie</option>
         <option selected="selected">Development</option>
         <option>HR</option>
     </select>
 
-    <select multiple class="dropdown" data-bind-element="fieldResult">
+    <select multiple
+            id="levels"
+            class="dropdown"
+            data-bind-element="fieldResult"
+            data-placeholder="Levels">
         <option>Level 1</option>
         <option>Level 2</option>
         <option selected="selected">Level 3</option>
@@ -33,7 +42,10 @@
 
     <input type="text" placeholder="Search for location" data-bind-element="fieldResult">
 
-    <select class="dropdown" data-bind-element="fieldResult">
+    <select class="dropdown"
+            id="distance"
+            data-bind-element="fieldResult"
+            data-placeholder="Distance">
         <option>10km</option>
         <option>20km</option>
         <option>30km</option>
@@ -41,33 +53,17 @@
         <option>50km</option>
     </select>
 
-    <select class="dropdown" data-bind-element="fieldResult">
-        <option>10km</option>
-        <option>20km</option>
-        <option>30km</option>
-        <option>40km</option>
-        <option>50km</option>
-    </select>
-
-    <select class="dropdown" data-bind-element="fieldResult">
-        <option>10km</option>
-        <option>20km</option>
-        <option>30km</option>
-        <option>40km</option>
-        <option>50km</option>
-    </select>
-
-    <button type="submit" class="btn" id="send" data-bind-element="fieldResult">SEARCH</button>
+    <button type="submit" class="btn" id="send" data-bind-element="fieldResult">Search</button>
 
     <div class="tags" id="fieldResult"></div>
 
 </form>
 
-<script src="js/fields/tags.js"></script>
+<!--<script src="js/fields/tags.js"></script>-->
 <script src="js/fields/base.js"></script>
-<script src="js/fields/select.js"></script>
-<script src="js/fields/button.js"></script>
-<script src="js/form.js"></script>
+<!--<script src="js/fields/select.js"></script>-->
+<!--<script src="js/fields/button.js"></script>-->
+<!--<script src="js/form.js"></script>-->
 
 </body>
 

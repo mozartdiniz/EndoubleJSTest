@@ -8,6 +8,7 @@ Endouble.Select = function () {
         Endouble.Base.apply(this, arguments);
 
         this.type = 'dropdown';
+        this.placeholder = formEl.getAttribute('data-placeholder');
         this.value = [];
 
         this.createElement = function () {
@@ -45,23 +46,57 @@ Endouble.Select = function () {
 
             li.setAttribute('data-value', option.value);
             li.innerHTML = option.innerHTML;
-            li.addEventListener('click', this.listItemAction.bind(this));
+            li.addEventListener('click', this.toggleCreateListItemChecked.bind(this));
 
             return li;
 
         };
 
-        this.listItemAction = function (e) {
+        this.placeholderBuilder = function () {
 
-            this.setValue (e.target.getAttribute('data-value'));
-            this.bind(formEl);
-            e.target.className = 'checked';
+            if (!this.value.length) {
+                this.button.innerHTML = this.placeholder;
+            } else if (this.value.length === 1) {
+                this.button.innerHTML = this.value[0];
+            } else {
+                this.button.innerHTML = this.value.length + ' items';
+            }
 
+        };
+
+        this.toggleCreateListItemChecked = function (e) {
+
+            var el = e.target;
+            var value = el.getAttribute('data-value');
+
+            if (el.className === 'checked') {
+
+                this.bind('remove', value);
+                this.removeValue (value);
+                el.className = '';
+
+            } else {
+
+                this.setValue (value);
+                el.className = 'checked';
+                this.bind('add');
+
+            }
+
+            this.placeholderBuilder ();
         };
 
         this.setValue = function(value) {
             if (this.allowAddNewItem(value)) {
                 this.value.push(value);
+            }
+        };
+
+        this.removeValue = function (value) {
+            for (var i = 0, len = this.value.length; i < len; i++) {
+                if (this.value[i] === value) {
+                    this.value.splice(i, 1);
+                }
             }
         };
 
@@ -73,7 +108,7 @@ Endouble.Select = function () {
 
             this.button = document.createElement('button');
 
-            this.button.innerHTML = 'Dropdown';
+            this.button.innerHTML = this.placeholder;
             this.button.className = 'btn';
             this.button.type = 'button';
 
@@ -95,24 +130,25 @@ Endouble.Select = function () {
 
         };
 
-        this.toggleMenu = function () {
+        this.toggleMenu = function (e) {
 
-            this.closeExpandedMenus();
+            e.stopPropagation();
 
             if (this.ul.getAttribute('aria-expanded') === 'true') {
                 this.closeMenu();
             } else {
+                this.closeExpandedMenus();
                 this.openMenu();
             }
 
         };
 
         this.closeMenu = function () {
-            this.ul.setAttribute('aria-expanded', false);
+            this.ul.setAttribute('aria-expanded', 'false');
         };
 
         this.openMenu = function () {
-            this.ul.setAttribute('aria-expanded', true);
+            this.ul.setAttribute('aria-expanded', 'true');
         };
 
     }
