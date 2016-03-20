@@ -7,6 +7,9 @@ Endouble.Select = function () {
 
         Endouble.Base.apply(this, arguments);
 
+        var multiple   = formEl.multiple,
+            countDownId = null;
+
         this.type = 'dropdown';
         this.placeholder = formEl.getAttribute('data-placeholder');
         this.value = [];
@@ -17,6 +20,8 @@ Endouble.Select = function () {
 
             fragment.appendChild(this.createButton());
             fragment.appendChild(this.createList());
+
+            document.addEventListener('click', this.closeExpandedMenus.bind(this));
 
             return fragment;
 
@@ -54,54 +59,81 @@ Endouble.Select = function () {
 
         this.placeholderBuilder = function () {
 
-            if (!this.value.length) {
+            var values = this.getValue();
+
+            if (!values.length) {
                 this.button.innerHTML = this.placeholder;
-            } else if (this.value.length === 1) {
-                this.button.innerHTML = this.value[0];
+            } else if (values.length === 1) {
+                this.button.innerHTML = values[0].value;
             } else {
-                this.button.innerHTML = this.value.length + ' items';
+                this.button.innerHTML = values.length + ' items';
             }
 
         };
 
         this.toggleCreateListItemChecked = function (e) {
 
+            e.stopPropagation();
+
             var el = e.target;
             var value = el.getAttribute('data-value');
 
             if (el.className === 'checked') {
 
-                this.bind('remove', value);
-                this.removeValue (value);
-                el.className = '';
+                this.removeValue ({
+                    value: value
+                });
 
             } else {
 
-                this.setValue (value);
-                el.className = 'checked';
-                this.bind('add');
+                if (!multiple) {
+                    this.closeMenu();
+                }
+
+                this.checkMultipleBeforeAdd({
+                    value: value
+                });
 
             }
+
+        };
+
+        this.checkMultipleBeforeAdd = function (options) {
+
+            var values = this.getValue();
+
+            if (!multiple && values.length) {
+
+                this.removeValue({
+                    value: values[0].value
+                });
+            }
+
+            this.addValue (options);
+
+        };
+
+        this.addToInterface = function () {
 
             this.placeholderBuilder ();
+
+            this.readValues(function (valueItem) {
+                this.createValueItemRender(valueItem);
+            }.bind(this));
+
         };
 
-        this.setValue = function(value) {
-            if (this.allowAddNewItem(value)) {
-                this.value.push(value);
-            }
+        this.createValueItemRender = function (options) {
+            var el = document.querySelector('[data-value="' + options.value + '"]');
+            el.className = 'checked';
         };
 
-        this.removeValue = function (value) {
-            for (var i = 0, len = this.value.length; i < len; i++) {
-                if (this.value[i] === value) {
-                    this.value.splice(i, 1);
-                }
-            }
-        };
+        this.removeFromInterface = function (value) {
 
-        this.getValue = function () {
-            return this.value;
+            this.placeholderBuilder ();
+
+            var el = document.querySelector('[data-value="' + value + '"]');
+            el.className = '';
         };
 
         this.createButton = function () {
@@ -141,6 +173,17 @@ Endouble.Select = function () {
                 this.openMenu();
             }
 
+        };
+
+        this.cleatCountDown = function () {
+            clearTimeout(countDownId);
+        };
+
+        this.toggleCountDown = function () {
+
+            countDownId = setTimeout(function () {
+                this.closeMenu();
+            }.bind(this), 300);
         };
 
         this.closeMenu = function () {

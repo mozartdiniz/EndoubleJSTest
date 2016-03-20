@@ -1,0 +1,9 @@
+input[type="text"] {
+  padding: 10px;
+  border: 1px solid #E5E5E5;
+  transition: 300ms;
+
+  &:focus {
+    border: 1px solid #7F0B72;
+  }
+}

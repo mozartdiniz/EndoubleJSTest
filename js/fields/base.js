@@ -7,18 +7,18 @@ Endouble.Base = function () {
 
         Endouble.fieldsList = Endouble.fieldsList || {};
 
-        var type    = 'base_element',
-            values  = [],
-            action  = null,
+        var values = [],
+            action = null,
             bind_el = formEl.getAttribute('data-bind-element');
 
-        this.id     = formEl.id;
-        this.el     = null;
+        this.type = 'base_element';
+        this.id = formEl.id;
+        this.el = null;
 
         Endouble.fieldsList[this.id] = this;
 
         //Prevent repeating the code through methods
-        var readValues = function (callback) {
+        this.readValues = function (callback) {
             for (var i = 0, len = values.length; i < len; i++) {
                 callback(values[i], i);
             }
@@ -27,7 +27,7 @@ Endouble.Base = function () {
         //This method prevent repeat values inside each component.
         var allowAddNewItem = function (options) {
 
-            readValues (function (valueItem) {
+            this.readValues(function (valueItem) {
                 if (valueItem.value === options.value && valueItem.origin === options.origin) {
                     return false;
                 }
@@ -35,7 +35,7 @@ Endouble.Base = function () {
 
             return true;
 
-        };
+        }.bind(this);
 
         /*
          * Add value expects a object as a parameter with the following values:
@@ -46,8 +46,8 @@ Endouble.Base = function () {
          * */
         var addValue = function (options) {
 
-            if (allowAddNewItem (options)) {
-                values.push (options);
+            if (allowAddNewItem(options)) {
+                values.push(options);
             }
 
         };
@@ -68,9 +68,9 @@ Endouble.Base = function () {
 
         this.createBaseHTML = function () {
 
-            this.el           = document.createElement('div');
-            this.el.className = type;
-            this.el.id        = this.id;
+            this.el = document.createElement('div');
+            this.el.className = this.type;
+            this.el.id = this.id;
 
         };
 
@@ -93,7 +93,11 @@ Endouble.Base = function () {
 
         this.addValue = function (options) {
 
-            var field = this.getFieldFromFormFieldList (bind_el);
+            var field = this.getFieldFromFormFieldList(bind_el);
+
+            if (!options.origin) {
+                options.origin = this.id;
+            }
 
             addValue(options);
 
@@ -104,24 +108,30 @@ Endouble.Base = function () {
                 });
             }
 
-            this.updateInterface();
+            this.addToInterface();
 
         };
 
         this.removeValue = function (options) {
 
-            var field = this.getFieldFromFormFieldList(bind_el);
+            var field = this.getFieldFromFormFieldList(bind_el || options.origin);
 
             removeValue(options);
 
-            if (field) {
-                field.removeValue({
-                    origin: this.id,
-                    value: options.value
-                });
+            this.removeFromInterface(options.value);
+
+            if (bind_el && !options.origin) {
+
+                if (!options.origin) {
+                    options.origin = this.id;
+                }
+
+                field.removeValue(options);
+
+            } else if (!bind_el && options.origin) {
+                field.removeValue(options);
             }
 
-            this.updateInterface();
         };
 
         this.getFieldFromFormFieldList = function (fieldId) {
@@ -141,21 +151,27 @@ Endouble.Base = function () {
 
         };
 
-        this.updateInterface = function () {
+        this.addToInterface = function () {
 
             var elValue = '';
 
             //Prevent update interface before render interface
             if (this.el) {
-                this.el.firstChild.value = '';
 
-                readValues (function (valueItem) {
+                this.readValues(function (valueItem) {
                     elValue = elValue + this.createValueItemRender(valueItem) + ' ';
                 }.bind(this));
 
-                this.el.firstChild.value = elValue.trim();
+                if (elValue.trim()) {
+                    this.el.firstChild.value = elValue.trim();
+                }
+
             }
 
+        };
+
+        this.removeFromInterface = function (value) {
+            this.el.firstChild.value = this.el.firstChild.value.replace(value, '').trim();
         };
 
         this.createValueItemRender = function (valueItem) {
@@ -166,6 +182,7 @@ Endouble.Base = function () {
 
             this.createBaseHTML();
             this.el.appendChild(this.createElement());
+            this.addToInterface();
             this.appendEl();
 
             return this;

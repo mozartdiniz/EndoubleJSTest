@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Javascript test</title>
 
-    <link rel="stylesheet" href="css/fields.css"/>
+    <link rel="stylesheet" href="index.css"/>
 
 </head>
 
@@ -25,8 +25,8 @@
 
         <option>Project management</option>
         <option>Sales</option>
-        <option selected="selected">Directie</option>
-        <option selected="selected">Development</option>
+        <option>Directie</option>
+        <option>Development</option>
         <option>HR</option>
     </select>
 
@@ -37,10 +37,10 @@
             data-placeholder="Levels">
         <option>Level 1</option>
         <option>Level 2</option>
-        <option selected="selected">Level 3</option>
+        <option>Level 3</option>
     </select>
 
-    <input type="text" placeholder="Search for location" data-bind-element="fieldResult">
+    <input type="text" placeholder="Search for location" id="location">
 
     <select class="dropdown"
             id="distance"
@@ -53,17 +53,18 @@
         <option>50km</option>
     </select>
 
-    <button type="submit" class="btn" id="send" data-bind-element="fieldResult">Search</button>
+    <button type="submit" class="btn" id="send">Search</button>
 
     <div class="tags" id="fieldResult"></div>
 
 </form>
 
-<!--<script src="js/fields/tags.js"></script>-->
 <script src="js/fields/base.js"></script>
-<!--<script src="js/fields/select.js"></script>-->
-<!--<script src="js/fields/button.js"></script>-->
-<!--<script src="js/form.js"></script>-->
+<script src="js/fields/tags.js"></script>
+<script src="js/fields/text.js"></script>
+<script src="js/fields/select.js"></script>
+<script src="js/fields/button.js"></script>
+<script src="js/form.js"></script>
 
 </body>
 

@@ -1,0 +1,89 @@
+div.dropdown {
+
+  button {
+    &.btn {
+      padding: 8px;
+      background: white;
+      border: 1px solid #E5E5E5;
+      color: #737577;
+      padding-right: 30px;
+      cursor: pointer;
+      width: inherit;
+      text-align: left;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      position: relative;
+      float: left;
+
+      &:focus {
+        border: 1px solid #7F0B72;
+      }
+
+      &::before {
+        content: '';
+        position: relative;
+        width: 25px;
+        height: 20px;
+        float: right;
+        margin-right: -30px;
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgNDggNDgiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgc3R5bGU9ImZpbGwtcnVsZTpldmVub2RkO2NsaXAtcnVsZTpldmVub2RkO3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxLjQxNDIxOyI+PHBhdGggZD0iTTE0LjgzLDE2LjQybDkuMTcsOS4xN2w5LjE3LC05LjE3bDIuODMsMi44M2wtMTIsMTJsLTEyLC0xMmwyLjgzLC0yLjgzWiIgc3R5bGU9ImZpbGw6IzczNzU3NztmaWxsLXJ1bGU6bm9uemVybzsiLz48cGF0aCBkPSJNMCwxbDAsNDUiIHN0eWxlPSJmaWxsOiM3Mzc1Nzc7c3Ryb2tlLXdpZHRoOjAuNzVweDtzdHJva2U6IzczNzU3NzsiLz48L3N2Zz4=) center right no-repeat, white;
+        background-size: 100%;
+      }
+
+    }
+  }
+
+  ul {
+    &.dropdown-menu {
+      display: block;
+      margin: 38px 0 0 0;
+      position: absolute;
+      clear: left;
+      padding: 0;
+      border-bottom: 1px solid #E5E5E5;
+
+      &[aria-expanded="false"] {
+        display: none;
+      }
+
+      &[aria-expanded="true"] {
+        display: block;
+        background: white;
+        margin-left: 0;
+        width: inherit;
+      }
+
+      li {
+        list-style: none;
+        transition: 200ms;
+        color: #737577;
+        cursor: pointer;
+        padding: 10px 10px 4px 10px;
+        border-right: 1px solid #E5E5E5;
+        border-left: 1px solid #E5E5E5;
+
+        &:hover {
+          color: #BAD96A;
+        }
+
+        &:last-child {
+          padding: 10px 10px 10px 10px;
+        }
+
+        &.checked {
+
+          padding: 10px 10px 4px 20px;
+          color: #7F0B72;
+
+          &:last-child {
+            padding: 10px 10px 10px 20px;
+          }
+        }
+
+      }
+
+    }
+  }
+
+}

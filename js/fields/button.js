@@ -9,7 +9,6 @@ Endouble.Button = function () {
 
         this.type = 'button';
 
-
         this.createElement = function () {
 
             var button = document.createElement('button');
@@ -18,14 +17,33 @@ Endouble.Button = function () {
             button.type = 'button';
             button.innerHTML = formEl.innerHTML;
 
-            this.setValue(formEl.innerHTML);
+            this.addValue({
+                value: formEl.innerHTML
+            });
 
             button.addEventListener('click', function (e) {
-                this.bind(formEl);
                 this.triggerAction(e);
             }.bind(this));
 
             return button;
+        };
+
+        this.addToInterface = function () {
+
+            var elValue = '';
+
+            //Prevent update interface before render interface
+            if (this.el && this.el.firstChild) {
+
+                this.el.firstChild.innerHTML = '';
+
+                this.readValues (function (valueItem) {
+                    elValue = elValue + this.createValueItemRender(valueItem) + ' ';
+                }.bind(this));
+
+                this.el.firstChild.innerHTML = elValue.trim();
+            }
+
         };
 
 

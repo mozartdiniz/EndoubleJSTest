@@ -71,7 +71,7 @@ describe('Testing base field methods', function() {
     });
 
     it('Field 2 should return a array with two positions and a key of the first one should be value A', function() {
-        expect(field2.getValue()[0].value).toBe('B');
+            expect(field2.getValue()[0].value).toBe('B');
     });
 
     it('Field 2 element value should be B C', function() {

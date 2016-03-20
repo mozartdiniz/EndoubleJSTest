@@ -14,13 +14,8 @@ Endouble.Form = (function () {
 
         for(var i = 0, l = drops.length; i<l; i++) {
 
-            setTimeout((function (dropsItem, i) {
-                return function () {
-
-                    var dropDownEl = new Endouble.Select(dropsItem).render();
-                    Endouble.fieldsList[dropDownEl.el.id || 'd' + i] = dropDownEl;
-                };
-            }(drops[i], i)), 10);
+            var dropDownEl = new Endouble.Select(drops[i]).render();
+            Endouble.fieldsList[dropDownEl.el.id || 'd' + i] = dropDownEl;
 
         }
     };
@@ -31,13 +26,8 @@ Endouble.Form = (function () {
 
         for(var i = 0, l = buttons.length; i<l; i++) {
 
-            setTimeout((function (button, i) {
-                return function () {
-
-                    var buttonEl = new Endouble.Button(button).render();
-                    Endouble.fieldsList[buttonEl.el.id || 'b' + i] = buttonEl;
-                };
-            }(buttons[i], i)), 10);
+            var buttonEl = new Endouble.Button(buttons[i]).render();
+            Endouble.fieldsList[buttonEl.el.id || 'b' + i] = buttonEl;
 
         }
 
@@ -49,23 +39,47 @@ Endouble.Form = (function () {
 
         for(var i = 0, l = tagsContainers.length; i<l; i++) {
 
-            setTimeout((function (tagContainer, i) {
-                return function () {
+            var tagEl = new Endouble.Tags(tagsContainers[i]).render();
+            Endouble.fieldsList[tagEl.el.id || 't' + i] = tagEl;
 
-                    var tagEl = new Endouble.Tags(tagContainer).render();
-                    Endouble.fieldsList[tagEl.el.id || 't' + i] = tagEl;
-                };
-            }(tagsContainers[i], i)), 10);
+        }
 
+    };
+
+    var texts = function () {
+
+        var tagsContainers = document.querySelectorAll('input[type="text"]');
+
+        for(var i = 0, l = tagsContainers.length; i<l; i++) {
+
+            var tagEl = new Endouble.Text(tagsContainers[i]).render();
+            Endouble.fieldsList[tagEl.el.id || 't' + i] = tagEl;
+
+        }
+
+    };
+
+    var detectPlaForm = function () {
+
+        var isIE = (navigator.userAgent.match(/MSIE 9.0/)) ? true : false;
+
+        Endouble.platforms = {
+            isIE9: isIE
+        };
+
+        if (isIE) {
+            document.body.className = 'isIE';
         }
 
     };
 
     var renderComponents = function () {
 
-        dropDowns();
+        detectPlaForm();
         buttons();
+        dropDowns();
         tags();
+        texts();
 
     };
 

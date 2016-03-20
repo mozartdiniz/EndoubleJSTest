@@ -1,0 +1,28 @@
+* {
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: lighter;
+}
+
+textarea, input, button {
+  outline: none;
+}
+
+div.dropdown, div.button, input {
+  display: block;
+  margin: 0 5px 0 5px;
+  float: left;
+  z-index: 2;
+}
+
+#roles {
+  width: 177px;
+}
+
+#levels {
+  width: 100px;
+}
+
+#distance {
+  width: 200px;
+}
