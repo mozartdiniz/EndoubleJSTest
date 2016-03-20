@@ -10,7 +10,7 @@ input[type="text"] {
   }
 }
 
-@media only screen and (max-device-width: 450px) and (orientation: portrait) {
+@media only screen and (max-device-width: 450px) {
 
   div {
     &.text {
@@ -25,4 +25,18 @@ input[type="text"] {
     }
   }
 
+}
+
+@media only screen and (max-device-width: 960px) and (orientation: landscape) {
+  div {
+    &.text {
+      width: auto;
+      margin-bottom: 0;
+
+      input[type="text"] {
+        width: inherit;
+      }
+
+    }
+  }
 }
