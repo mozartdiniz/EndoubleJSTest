@@ -5,7 +5,15 @@
 }
 
 textarea, input, button {
-  outline: none;
+  outline: 0;
+}
+
+button:hover, button:active, button:focus {
+  outline: 0;
+}
+
+button::-moz-focus-inner {
+  border: 0;
 }
 
 div.dropdown, div.button, input {
@@ -28,11 +36,10 @@ div.dropdown, div.button, input {
 }
 
 div.dropdown button.btn {
-  padding: 8px;
+  padding: 8px 30px 8px 8px;
   background: white;
   border: 1px solid #E5E5E5;
   color: #737577;
-  padding-right: 30px;
   cursor: pointer;
   width: inherit;
   text-align: left;
@@ -41,6 +48,8 @@ div.dropdown button.btn {
   text-overflow: ellipsis;
   position: relative;
   float: left;
+  line-height: 20px;
+  height: 38px;
 }
 div.dropdown button.btn:focus {
   border: 1px solid #7F0B72;

@@ -4,6 +4,7 @@
   "author": "Mozart Diniz <mozart.diniz@gmail.com>",
   "devDependencies": {
     "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^1.0.0",
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-karma": "^0.12.2",

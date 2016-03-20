@@ -145,9 +145,14 @@ Endouble.Select = function () {
             this.button.type = 'button';
 
             this.button.addEventListener('click', this.toggleMenu.bind(this));
+            this.button.addEventListener('click', this.buttonFoceFocus.bind(this));
 
             return this.button;
 
+        };
+
+        this.buttonFoceFocus = function () {
+            this.button.focus();
         };
 
         this.closeExpandedMenus = function () {

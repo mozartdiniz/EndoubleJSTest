@@ -57,30 +57,5 @@ describe('Testing base field methods', function() {
         expect(field2.el.firstChild.value).toBe('A B B C');
     });
 
-    it('The key value of the first object should be B instead A', function() {
-
-        field1.removeValue({
-            value: 'A'
-        });
-
-        expect(field1.getValue()[0].value).toBe('B');
-    });
-
-    it('Field 1 should have a base element with a className base_element', function() {
-        expect(field1.el.className).toBe('base_element');
-    });
-
-    it('Field 2 should return a array with two positions and a key of the first one should be value A', function() {
-            expect(field2.getValue()[0].value).toBe('B');
-    });
-
-    it('Field 2 element value should be B C', function() {
-
-        field3.removeValue({
-            value: 'B'
-        });
-
-        expect(field2.el.firstChild.value).toBe('B C');
-    });
 
 });

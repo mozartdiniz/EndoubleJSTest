@@ -171,7 +171,9 @@ Endouble.Base = function () {
         };
 
         this.removeFromInterface = function (value) {
-            this.el.firstChild.value = this.el.firstChild.value.replace(value, '').trim();
+            if (this.el) {
+                this.el.firstChild.value = this.el.firstChild.value.replace(value, '').trim();
+            }
         };
 
         this.createValueItemRender = function (valueItem) {

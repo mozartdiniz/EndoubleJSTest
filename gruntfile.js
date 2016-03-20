@@ -8,6 +8,22 @@ module.exports = function (grunt) {
                 configFile: 'karma.conf.js'
             }
         },
+        concat: {
+            options: {
+                separator: ';'
+            },
+            dist: {
+                src: [
+                    'src/js/fields/Endouble.Base.js',
+                    'src/js/fields/Endouble.Tags.js',
+                    'src/js/fields/Endouble.Text.js',
+                    'src/js/fields/Endouble.Select.js',
+                    'src/js/fields/Endouble.Button.js',
+                    'src/js/Endouble.Form.js'
+                ],
+                dest: 'dist/enouble_form_builder.js'
+            }
+        },
         sass: {
             dev: {
                 options: {
@@ -17,9 +33,9 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: 'css',
+                        cwd: 'src/css',
                         src: ['*.scss'],
-                        dest: '',
+                        dest: 'dist',
                         ext: '.css'
                     }
                 ]
@@ -30,7 +46,7 @@ module.exports = function (grunt) {
                     compass: true
                 },
                 files: {
-                    "index.css": "css/index.scss"
+                    "index.css": "src/css/index.scss"
                 }
             }
         },
@@ -45,8 +61,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-concat');
 
-    grunt.registerTask('css', ['sass:dev']);
-    grunt.registerTask('default', ['watch']);
-    grunt.registerTask('test', ['sass:dev', 'karma']);
+    grunt.registerTask('build', ['sass:dev', 'concat']);
+    grunt.registerTask('default', ['sass:dev', 'concat', 'karma']);
 };

@@ -15,8 +15,7 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'js/fields/base.js',
-            'js/form.js',
+            'dist/enouble_form_builder.js',
             './test/**/*Spec.js'
         ],
 
