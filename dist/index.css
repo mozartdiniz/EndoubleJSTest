@@ -35,6 +35,23 @@ div.dropdown, div.button, input {
   width: 200px;
 }
 
+@media only screen and (max-device-width: 450px) and (orientation: portrait) {
+  #roles, #levels, #distance {
+    width: calc(100% - 4px);
+    margin-bottom: 20px;
+  }
+}
+@media only screen and (max-device-width: 960px) and (orientation: landscape) {
+  #roles {
+    width: 200px;
+  }
+
+  form > div {
+    float: left;
+    padding-bottom: 12px;
+    height: 45px;
+  }
+}
 div.dropdown button.btn {
   padding: 8px 30px 8px 8px;
   background: white;
@@ -80,6 +97,7 @@ div.dropdown ul.dropdown-menu[aria-expanded="true"] {
   background: white;
   margin-left: 0;
   width: inherit;
+  z-index: 9;
 }
 div.dropdown ul.dropdown-menu li {
   list-style: none;
@@ -104,15 +122,32 @@ div.dropdown ul.dropdown-menu li.checked:last-child {
   padding: 10px 10px 10px 20px;
 }
 
+@media only screen and (max-device-width: 450px) and (orientation: portrait) {
+  div.dropdown ul.dropdown-menu[aria-expanded="true"] {
+    width: calc(100% - 24px);
+  }
+}
 input[type="text"] {
   padding: 10px;
   border: 1px solid #E5E5E5;
   transition: 300ms;
+  border-radius: 0;
+  -webkit-appearance: none;
 }
 input[type="text"]:focus {
   border: 1px solid #7F0B72;
 }
 
+@media only screen and (max-device-width: 450px) and (orientation: portrait) {
+  div.text {
+    margin-bottom: 16px;
+    float: left;
+    width: 100%;
+  }
+  div.text input[type="text"] {
+    width: calc(100% - 30px);
+  }
+}
 div.button button {
   background: #BAD96A;
   -webkit-appearance: none;

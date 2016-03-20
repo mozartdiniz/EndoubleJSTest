@@ -2,8 +2,27 @@ input[type="text"] {
   padding: 10px;
   border: 1px solid #E5E5E5;
   transition: 300ms;
+  border-radius: 0;
+  -webkit-appearance: none;
 
   &:focus {
     border: 1px solid #7F0B72;
   }
+}
+
+@media only screen and (max-device-width: 450px) and (orientation: portrait) {
+
+  div {
+    &.text {
+      margin-bottom: 16px;
+      float: left;
+      width: 100%;
+
+      input[type="text"] {
+        width: calc(100% - 30px);
+      }
+
+    }
+  }
+
 }

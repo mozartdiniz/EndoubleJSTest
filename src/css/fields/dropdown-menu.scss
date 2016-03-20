@@ -53,6 +53,7 @@ div.dropdown {
         background: white;
         margin-left: 0;
         width: inherit;
+        z-index: 9;
       }
 
       li {
@@ -84,6 +85,22 @@ div.dropdown {
 
       }
 
+    }
+  }
+
+}
+
+@media only screen and (max-device-width: 450px) and (orientation: portrait) {
+
+  div.dropdown {
+
+    ul {
+      &.dropdown-menu {
+
+        &[aria-expanded="true"] {
+          width: calc(100% - 24px);
+        }
+      }
     }
   }
 

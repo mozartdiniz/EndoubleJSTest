@@ -297,6 +297,7 @@ Endouble.Text = function () {
             var el = document.createElement('input');
             el.type = 'text';
 
+            //If it is not a IE9 browser, the polyfill is not necessary
             if (!Endouble.platforms.isIE9) {
                 el.setAttribute('placeholder', this.placeholder);
             } else {
@@ -309,6 +310,7 @@ Endouble.Text = function () {
             return el;
         };
 
+        //This method is used as a polyfill because IE9 does not support placeholder
         this.addFakePlaceholder = function (e) {
 
             var el = e.target;
@@ -320,6 +322,7 @@ Endouble.Text = function () {
 
         };
 
+        //This method is used as a polyfill because IE9 does not support placeholder
         this.removeFakePlaceholder = function (e) {
 
             var el = e.target;

@@ -35,3 +35,24 @@ div.dropdown, div.button, input {
 #distance {
   width: 200px;
 }
+
+@media only screen and (max-device-width: 450px) and (orientation: portrait) {
+  #roles, #levels, #distance {
+    width: calc(100% - 4px);
+    margin-bottom: 20px;
+  }
+}
+
+@media only screen and (max-device-width: 960px) and (orientation: landscape) {
+
+  #roles {
+    width: 200px;
+  }
+
+  form > div {
+    float: left;
+    padding-bottom: 12px;
+    height: 45px;
+  }
+
+}
